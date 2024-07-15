@@ -10,6 +10,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.player
 
+import net.ccbluex.liquidbounce.features.module.modules.player.FreeLook
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.MoveEvent
@@ -42,8 +43,8 @@ import net.minecraft.util.BlockPos
 import java.awt.Color
 import kotlin.math.roundToInt
 
-@ModuleInfo(name = "LegitScaffold", category = ModuleCategory.PLAYER)
-object LegitScaffold : Module() {
+@ModuleInfo(name = "Bridger", category = ModuleCategory.PLAYER)
+object Bridger : Module() {
     val modeValue = ListValue(
         "Mode",
         arrayOf("Simple", "SpeedBridge", "Breezily", "JitterBridge", "TellyBridge", "GodBridge"),
