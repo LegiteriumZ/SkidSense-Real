@@ -21,12 +21,9 @@ jobs:
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Build
-        run: chmod +x ./gradlew && ./gradlew setupCiWorkspace && ./gradlew build 
-      - name: Rename build artifacts
-        run: mv build/libs/FDPClient-*.jar build/libs/FDPClient-build.jar
+        run: chmod +x ./gradlew && ./gradlew setupCiWorkspace && ./gradlew build
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
           name: SkidSense
           path: build/libs/
-  
