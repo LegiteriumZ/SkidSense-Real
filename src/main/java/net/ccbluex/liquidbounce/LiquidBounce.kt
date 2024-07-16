@@ -39,7 +39,7 @@ object LiquidBounce {
 
     // Client information
 
-    const val CLIENT_NAME = "FDPClient"
+    const val CLIENT_NAME = "SkidSense"
 
     var Darkmode = true
     const val COLORED_NAME = "§7[§b§lFDPClient§7] "
