@@ -66,14 +66,14 @@ object HUD : Module() {
     private fun renderWatermark() {
         var width = 3
         mc.fontRendererObj.drawStringWithShadow(
-            "FDP",
+            "S",
             3.0f,
             3.0f,
             rainbow().rgb
         )
-        width += mc.fontRendererObj.getStringWidth("FDP")
+        width += mc.fontRendererObj.getStringWidth("S")
         mc.fontRendererObj.drawStringWithShadow(
-            "CLIENT",
+            "kidSense",
             width.toFloat(),
             3.0f,
             -1
@@ -85,7 +85,7 @@ object HUD : Module() {
         LiquidBounce.hud.update()
         if (mc.currentScreen == null && lastFontEpsilon != fontEpsilonValue.get()) {
             lastFontEpsilon = fontEpsilonValue.get()
-            alert("You need to reload FDPClient to apply changes!")
+            alert("You need to reload SkidSense to apply changes!")
         }
     }
 

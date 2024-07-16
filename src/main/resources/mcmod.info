@@ -1,13 +1,13 @@
 [
   {
-    "modid": "fdpclient",
-    "name": "FDPClient",
+    "modid": "skidsense cient",
+    "name": "SkidSense Client",
     "description": "Minecraft 1.8 Utility mod",
     "version": "${version}",
     "mcversion": "${mcversion}",
-    "url": "https://fdpinfo.github.io",
+    "url": "https://dsc.gg/binhz",
     "updateUrl": "",
-    "authorList": ["CCBlueX", "Zywl", "SkidderMC"],
+    "authorList": ["CCBlueX", "Zywl", "SkidderMC", "LegiteriumZ"],
     "credits": "",
     "logoFile": "",
     "screenshots": [],
