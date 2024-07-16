@@ -28,4 +28,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: SkidSense
-          path: build/libs/FDPClient-build.jar
+          path: build/libs/
+  
