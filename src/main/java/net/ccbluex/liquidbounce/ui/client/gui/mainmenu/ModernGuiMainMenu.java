@@ -69,7 +69,7 @@ public class ModernGuiMainMenu extends GuiScreen {
             FontLoaders.F40.drawCenteredString("SkidSense Client",(float)this.width / 2.0F,(float)this.height / 2.0F - 70.0F,new Color(255,255,255).getRGB());
             FontLoaders.F18.drawCenteredString(LiquidBounce.CLIENT_VERSION,(float)this.width / 2.0F,(float)this.height / 2.0F - 30.0F,new Color(255,255,255).getRGB());
             RenderUtils.drawRect((float)this.width / 2.0F - 30f,(float)this.height / 2.0F - 40.0F,(float)this.width / 2.0F + 30f,(float)this.height / 2.0F - 39.5F,new Color(255,255,255,100).getRGB());
-            FontLoaders.F18.drawCenteredString("Skid by LegiteriumZ with bypasses .",(float)this.width / 2.0F,(float)this.height / 2.0F + 70.0F,new Color(255,255,255,100).getRGB());
+            FontLoaders.F18.drawCenteredString("Skid by LegiteriumZ with bypasses.",(float)this.width / 2.0F,(float)this.height / 2.0F + 70.0F,new Color(255,255,255,100).getRGB());
 
         }catch (Exception e){
             e.printStackTrace();

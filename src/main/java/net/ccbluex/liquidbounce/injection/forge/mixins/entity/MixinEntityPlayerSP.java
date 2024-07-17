@@ -5,6 +5,8 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
+import net.ccbluex.liquidbounce.features.module.modules.movement.*;
+import net.ccbluex.liquidbounce.features.module.modules.player.Bridger;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals;
@@ -264,7 +266,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
         boolean lastJumpToggleState = this.movementInput.jump;
         
         this.movementInput.updatePlayerMoveState();
-        
+        final Bridger bridger = LiquidBounce.moduleManager.getModule(Bridger.class);
         final Sprint sprint = LiquidBounce.moduleManager.getModule(Sprint.class);
         final NoSlow noSlow = LiquidBounce.moduleManager.getModule(NoSlow.class);
         final KillAura killAura = LiquidBounce.moduleManager.getModule(KillAura.class);
