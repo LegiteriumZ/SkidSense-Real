@@ -1,7 +1,7 @@
 /*
- * FDPClient Hacked Client
+ * LiquidBounce Hacked Client
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge by LiquidBounce.
- * https://github.com/SkidderMC/FDPClient/
+ * https://github.com/SkidderMC/LiquidBounce/
  */
 package net.ccbluex.liquidbounce.features.module.modules.world
 
@@ -345,7 +345,7 @@ class Scaffold : Module() {
                     }
                 }
                 "whenspeed" -> {
-                    canSameY = FDPClient.moduleManager[Speed::class.java]!!.state
+                    canSameY = LiquidBounce.moduleManager[Speed::class.java]!!.state
                 }
                 "hypixel" -> {
                     canSameY = mc.thePlayer.ticksExisted % 11 > 4
@@ -497,7 +497,7 @@ class Scaffold : Module() {
 
         if (placeModeValue.equals("All")) place()
 
-        FDPClient.moduleManager[StrafeFix::class.java]!!.applyForceStrafe(true, moveFixValue.get())
+        LiquidBounce.moduleManager[StrafeFix::class.java]!!.applyForceStrafe(true, moveFixValue.get())
 
         if (eagleValue.equals("Legit") && placing && mc.thePlayer.ticksExisted % eaglelegitvalue.get() == 0) {
             if (eaglelegitpacketvalue.get()) {
