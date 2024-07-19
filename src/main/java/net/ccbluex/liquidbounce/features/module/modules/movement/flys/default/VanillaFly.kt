@@ -10,7 +10,7 @@ import net.ccbluex.liquidbounce.features.value.ListValue
 import net.minecraft.network.play.client.C00PacketKeepAlive
 import net.minecraft.network.play.client.C03PacketPlayer
 
-class VanillaFly : FlyMode("3FMC") {
+class VanillaFly : FlyMode("Vanilla") {
     private val smoothValue = BoolValue("${valuePrefix}Smooth", false)
     private val speedValue = FloatValue("${valuePrefix}Speed", 2f, 0f, 5f)
     private val vspeedValue = FloatValue("${valuePrefix}Vertical", 2f, 0f, 5f)

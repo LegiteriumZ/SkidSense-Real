@@ -3,7 +3,7 @@ import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMod
 import net.ccbluex.liquidbounce.utils.MovementUtils
 import net.ccbluex.liquidbounce.features.value.FloatValue
 
-class NCPYPort2Speed : SpeedMode("IntaveYPort2") {
+class NCPYPort2Speed : SpeedMode("NCPYPort2") {
     var ticks = 0
     var jumps = 0
 

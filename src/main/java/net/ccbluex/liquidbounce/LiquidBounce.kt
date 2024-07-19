@@ -42,7 +42,7 @@ object LiquidBounce {
     const val CLIENT_NAME = "SkidSense"
 
     var Darkmode = true
-    const val COLORED_NAME = "§7[§b§lSkidSense Client§7] "
+    const val COLORED_NAME = "§b[§b§lSkidSense Client§b] "
     const val CLIENT_CREATOR = "CCBlueX, Zywl & SkidderMC TEAM, LegiteriumZ"
     const val CLIENT_WEBSITE = "dsc.gg/binhz"
     
@@ -115,6 +115,7 @@ object LiquidBounce {
     /**
      * Execute if client will be started
      */
+
     fun initClient() {
         ClientUtils.logInfo("Loading $CLIENT_NAME $CLIENT_VERSION, by $CLIENT_CREATOR")
         ClientUtils.logInfo("Initialzing...")

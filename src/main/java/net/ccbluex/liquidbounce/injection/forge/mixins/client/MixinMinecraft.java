@@ -118,6 +118,22 @@ public abstract class MixinMinecraft {
          LiquidBounce.INSTANCE.initClient();
      }
 
+/*
+    @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V", ordinal = 1, shift = At.Shift.AFTER))
+    public void step1(CallbackInfo ci) {
+        SplashProgress.INSTANCE.setProgress(1, "textures");
+    }
+
+     */
+
+    /*
+    @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V", ordinal = 2, shift = At.Shift.AFTER))
+    public void step2(CallbackInfo ci) {
+        SplashProgress.INSTANCE.setProgress(3, "Gui");
+    }
+
+     */
+
     @Inject(method = "createDisplay", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V", shift = At.Shift.AFTER))
     private void createDisplay(CallbackInfo callbackInfo) {
         ClientUtils.INSTANCE.setTitle();
