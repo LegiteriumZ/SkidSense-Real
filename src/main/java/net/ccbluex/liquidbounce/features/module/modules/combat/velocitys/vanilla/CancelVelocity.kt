@@ -6,7 +6,7 @@ import net.minecraft.network.play.server.S12PacketEntityVelocity
 import net.ccbluex.liquidbounce.utils.misc.RandomUtils
 import net.ccbluex.liquidbounce.features.module.modules.combat.velocitys.VelocityMode
 
-class CancelVelocity : VelocityMode("Cancel") {
+class CancelVelocity : VelocityMode("Intave00") {
     val cancelHorizontal = BoolValue("CancelHorizontalVelocity", true)
     val cancelVertical = BoolValue("CancelVerticalVelocity", true)
     

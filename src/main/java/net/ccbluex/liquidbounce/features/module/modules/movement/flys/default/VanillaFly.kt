@@ -10,7 +10,7 @@ import net.ccbluex.liquidbounce.features.value.ListValue
 import net.minecraft.network.play.client.C00PacketKeepAlive
 import net.minecraft.network.play.client.C03PacketPlayer
 
-class VanillaFly : FlyMode("Vanilla") {
+class VanillaFly : FlyMode("3FMC") {
     private val smoothValue = BoolValue("${valuePrefix}Smooth", false)
     private val speedValue = FloatValue("${valuePrefix}Speed", 2f, 0f, 5f)
     private val vspeedValue = FloatValue("${valuePrefix}Vertical", 2f, 0f, 5f)
@@ -20,6 +20,7 @@ class VanillaFly : FlyMode("Vanilla") {
     private val keepAliveValue = BoolValue("${valuePrefix}KeepAlive", false)
     private val noClipValue = BoolValue("${valuePrefix}NoClip", false)
     private val spoofValue = BoolValue("${valuePrefix}SpoofGround", false)
+
 
     private var packets = 0
     private var kickBypassMotion = 0f
