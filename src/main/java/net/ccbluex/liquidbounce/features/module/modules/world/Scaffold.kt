@@ -1,9 +1,10 @@
 /*
- * LiquidBounce Hacked Client
+ * FDPClient Hacked Client
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge by LiquidBounce.
- * https://github.com/SkidderMC/LiquidBounce/
+ * https://github.com/SkidderMC/FDPClient/
  */
 package net.ccbluex.liquidbounce.features.module.modules.world
+
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
@@ -21,6 +22,7 @@ import net.ccbluex.liquidbounce.utils.block.PlaceInfo.Companion.get
 import net.ccbluex.liquidbounce.utils.extensions.drawCenteredString
 import net.ccbluex.liquidbounce.utils.extensions.rayTraceWithServerSideRotation
 import net.ccbluex.liquidbounce.utils.render.GlowUtils
+import net.ccbluex.liquidbounce.utils.SpoofItemUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.utils.timer.TickTimer
@@ -29,6 +31,8 @@ import net.ccbluex.liquidbounce.features.value.BoolValue
 import net.ccbluex.liquidbounce.features.value.FloatValue
 import net.ccbluex.liquidbounce.features.value.IntegerValue
 import net.ccbluex.liquidbounce.features.value.ListValue
+import net.ccbluex.liquidbounce.features.module.modules.movement.StrafeFix
+import net.ccbluex.liquidbounce.features.module.modules.movement.Speed
 import net.minecraft.block.BlockAir
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.GlStateManager
@@ -441,11 +445,11 @@ class Scaffold : Module() {
             }
 
             // Eagle
-            if (!eagleValue.get().equals("Off", true) && !eagleValue.get().equals("Legit", true) && !shouldGoDown) {
+            if (!eagleValue.get().equals("Off", true) && !shouldGoDown) {
                 var dif = 0.5
                 val blockPos = BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0, mc.thePlayer.posZ)
                 if (edgeDistanceValue.get() > 0) {
-                    for (facingType in EnumFacing.entries) {
+                    for (facingType in EnumFacing.values()) {
                         if (facingType == EnumFacing.UP || facingType == EnumFacing.DOWN) {
                             continue
                         }
@@ -483,6 +487,8 @@ class Scaffold : Module() {
                         mc.gameSettings.keyBindSneak.pressed = shouldEagle
                     }
                     placedBlocksWithoutEagle = 0
+                } else {
+                    placedBlocksWithoutEagle++
                 }
             }
             // Zitter
@@ -701,7 +707,7 @@ class Scaffold : Module() {
             "none", "legit" -> {
                 if (mc.thePlayer.onGround) {
                     fakeJump()
-                    mc.thePlayer.motionY = MovementUtils.jumpMotion
+                    mc.thePlayer.motionY = MovementUtils.jumpMotion.toDouble()
                 }
             }
             "jump" -> {
