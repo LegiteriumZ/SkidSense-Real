@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
-import net.ccbluex.liquidbounce.features.module.modules.render.PerspectiveMod;
+import net.ccbluex.liquidbounce.features.module.modules.player.FreeLook;
 import net.minecraft.client.renderer.entity.RenderManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,12 +13,12 @@ public class MixinRenderManager {
 
     @Redirect(method = "cacheActiveRenderInfo", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/RenderManager;playerViewX:F", opcode = PUTFIELD))
     public void getPlayerViewX(RenderManager renderManager, float value) {
-        renderManager.playerViewX = PerspectiveMod.perspectiveToggled ? PerspectiveMod.cameraPitch : value;
+        renderManager.playerViewX = FreeLook.perspectiveToggled ? FreeLook.cameraPitch : value;
     }
 
     @Redirect(method = "cacheActiveRenderInfo", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/RenderManager;playerViewY:F", opcode = PUTFIELD))
     public void getPlayerViewY(RenderManager renderManager, float value) {
-        renderManager.playerViewY = PerspectiveMod.perspectiveToggled ? PerspectiveMod.cameraYaw : value;
+        renderManager.playerViewY = FreeLook.perspectiveToggled ? FreeLook.cameraYaw : value;
     }
 
 }

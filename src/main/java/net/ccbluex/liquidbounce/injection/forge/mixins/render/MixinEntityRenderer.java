@@ -1,7 +1,7 @@
 /*
  * FDPClient Hacked Client
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge by LiquidBounce.
- * https://github.com/SkidderMC/FDPClient/
+ * https:github.com/SkidderMC/FDPClient/
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
@@ -14,7 +14,6 @@ import net.ccbluex.liquidbounce.features.module.modules.client.HurtCam;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Reach;
 import net.ccbluex.liquidbounce.features.module.modules.render.CameraClip;
 import net.ccbluex.liquidbounce.features.module.modules.render.Tracers;
-import net.ccbluex.liquidbounce.features.module.modules.render.PerspectiveMod;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Backtrack;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -251,51 +250,33 @@ public abstract class MixinEntityRenderer {
             this.mc.mcProfiler.endSection();
         }
     }
+
+
+
+
+    @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;prevRotationYaw:F", opcode = GETFIELD))
+    public float getPrevRotationYaw(Entity entity) {
+        return FreeLook.perspectiveToggled ? FreeLook.cameraYaw : entity.prevRotationYaw;
+    }
+
+    @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;rotationPitch:F", opcode = GETFIELD))
+    public float getRotationPitch(Entity entity) {
+        return FreeLook.perspectiveToggled ? FreeLook.cameraPitch : entity.rotationPitch;
+
+    }
+
+    @Redirect(method = "updateCameraAndRender", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;inGameHasFocus:Z", opcode = GETFIELD))
+    public boolean updateCameraAndRender(Minecraft minecraft) {
+        return FreeLook.overrideMouse();
+    }
+
+    @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;rotationYaw:F", opcode = GETFIELD))
+    public float getRotationYaw(Entity entity) {
+        return FreeLook.perspectiveToggled ? FreeLook.cameraYaw : entity.rotationYaw;
+    }
+
+    @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;prevRotationPitch:F"))
+        public float getPrevRotationPitch(Entity entity) {
+        return FreeLook.perspectiveToggled ? FreeLook.cameraPitch : entity.prevRotationPitch;
+    }
 }
-    
-
-   // @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;rotationYaw:F", opcode = GETFIELD))
-  //  public float getRotationYaw(Entity entity) {
-  //      return FreeLook.perspectiveToggled ? FreeLook.cameraYaw : entity.rotationYaw;
-//    }
-
- //   @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;prevRotationYaw:F", opcode = GETFIELD))
-   // public float getPrevRotationYaw(Entity entity) {
- //       return FreeLook.perspectiveToggled ? FreeLook.cameraYaw : entity.prevRotationYaw;
- //   }
-
-  //  @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;rotationPitch:F", opcode = GETFIELD))
-  //  public float getRotationPitch(Entity entity) {
-  //      return FreeLook.perspectiveToggled ? FreeLook.cameraPitch : entity.rotationPitch;
-    //}
-
-  //  @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;prevRotationPitch:F"))
- //   public float getPrevRotationPitch(Entity entity) {
- //       return FreeLook.perspectiveToggled ? FreeLook.cameraPitch : entity.prevRotationPitch;
-//}
-
-//@Redirect(method = "updateCameraAndRender", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;inGameHasFocus:Z", opcode = GETFIELD))
- //   public boolean updateCameraAndRender(Minecraft minecraft) {
-    //    return PerspectiveMod.overrideMouse();
-  //  }
-
-  //  @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;rotationYaw:F", opcode = GETFIELD))
-  //  public float getRotationYaw(Entity entity) {
-  //      return PerspectiveMod.perspectiveToggled ? PerspectiveMod.cameraYaw : entity.rotationYaw;
-  //  }
-
-   // @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;prevRotationYaw:F", opcode = GETFIELD))
-  //  public float getPrevRotationYaw(Entity entity) {
-//return PerspectiveMod.perspectiveToggled ? PerspectiveMod.cameraYaw : entity.prevRotationYaw;
- //   }
-
-//@Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;rotationPitch:F", opcode = GETFIELD))
-  //  public float getRotationPitch(Entity entity) {
- //       return PerspectiveMod.perspectiveToggled ? PerspectiveMod.cameraPitch : entity.rotationPitch;
-  //  }
-
- //   @Redirect(method = "orientCamera", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/Entity;prevRotationPitch:F"))
-//public float getPrevRotationPitch(Entity entity) {
-//return PerspectiveMod.perspectiveToggled ? PerspectiveMod.cameraPitch : entity.prevRotationPitch;
-//}
-//
