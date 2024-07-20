@@ -11,7 +11,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.client.mathalgo.*
 import net.ccbluex.liquidbounce.features.value.ListValue
 
-@ModuleInfo(name = "BetterFPS", category = ModuleCategory.CLIENT, array = false, canEnable = false)
+@ModuleInfo(name = "BetterFPS", category = ModuleCategory.CLIENT, array = true , canEnable = false)
 class BetterFPS : Module() {
     // Math
     val libGDX = LibGDXMath()

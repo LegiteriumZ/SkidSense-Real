@@ -24,12 +24,12 @@ import java.math.BigDecimal
 import java.util.*
 import kotlin.math.abs
 
-@ModuleInfo(name = "DamageParticle", category = ModuleCategory.RENDER)
+@ModuleInfo(name = "DamageParticle", category = ModuleCategory.RENDER,  defaultOn = true)
 class DamageParticle : Module() {
 
     private val aliveTicksValue = IntegerValue("AliveTicks", 20, 10, 50)
     private val sizeValue = IntegerValue("Size", 3, 1, 7)
-    private val colourValue = ListValue("ColourType", arrayOf("Damage", "Custom", "Rainbow"), "Custom")
+    private val colourValue = ListValue("ColourType", arrayOf("Damage", "Custom", "Rainbow"), "Rainbow")
     private val colorRedValue = IntegerValue("Red", 68, 0, 255).displayable { colourValue.get().equals("Custom") }
     private val colorGreenValue = IntegerValue("Green", 117, 0, 255).displayable { colourValue.get().equals("Custom") }
     private val colorBlueValue = IntegerValue("Blue", 255, 0, 255).displayable { colourValue.get().equals("Custom") }
