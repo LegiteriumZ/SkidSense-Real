@@ -9,6 +9,8 @@
     "gui.MixinGuiKeyBindingList",
     "gui.MixinGuiPlayerTabOverlay",
     "gui.MixinGuiSlot",
+    "fml.MixinFMLClientHandler",
+    "math.MixinMathHelper",
     "performance.MixinEntityFX",
     "performance.MixinRenderGlobal",
     "render.MixinLayerArmorBase",
