@@ -19,7 +19,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-@ModuleInfo(name = "StrafeFix", category = ModuleCategory.MOVEMENT)
+@ModuleInfo(name = "GCDCorrector", category = ModuleCategory.MOVEMENT, defaultOn = true)
 class StrafeFix : Module() {
 
     val silentFixVaule = BoolValue("Silent", true)

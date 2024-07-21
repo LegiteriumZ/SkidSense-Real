@@ -20,7 +20,7 @@ import net.minecraft.network.play.server.S19PacketEntityStatus
 import java.awt.Color
 @ModuleInfo(name = "HurtCam", category = ModuleCategory.CLIENT, canEnable = false)
 class HurtCam : Module() {
-    val modeValue = ListValue("Mode", arrayOf("Vanilla", "Cancel", "FPS"), "Vanilla")
+    val modeValue = ListValue("Mode", arrayOf("Vanilla", "Cancel", "FPS"), "Cancel")
     private val colorRedValue = IntegerValue("R", 255, 0, 255).displayable { modeValue.equals("FPS") }
     private val colorGreenValue = IntegerValue("G", 0, 0, 255).displayable { modeValue.equals("FPS") }
     private val colorBlueValue = IntegerValue("B", 0, 0, 255).displayable { modeValue.equals("FPS") }

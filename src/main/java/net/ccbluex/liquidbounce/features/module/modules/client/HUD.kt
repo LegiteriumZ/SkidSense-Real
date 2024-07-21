@@ -36,11 +36,11 @@ object HUD : Module() {
     private val blurValue = BoolValue("Blur", false)
     val HealthValue = BoolValue("Health", true)
     val waterMark = BoolValue("Watermark", true)
-    val rainbowStartValue = FloatValue("RainbowStart", 0.55f, 0f, 1f)
-    val rainbowStopValue = FloatValue("RainbowStop", 0.85f, 0f, 1f)
-    val rainbowSaturationValue = FloatValue("RainbowSaturation", 0.45f, 0f, 1f)
-    val rainbowBrightnessValue = FloatValue("RainbowBrightness", 0.85f, 0f, 1f)
-    val rainbowSpeedValue = IntegerValue("RainbowSpeed", 1500, 500, 7000)
+    val rainbowStartValue = FloatValue("RainbowStart", 1f, 0f, 1f)
+    val rainbowStopValue = FloatValue("RainbowStop", 0.15, 0f, 1f)
+    val rainbowSaturationValue = FloatValue("RainbowSaturation", 1f, 0f, 1f)
+    val rainbowBrightnessValue = FloatValue("RainbowBrightness", 1f, 0f, 1f)
+    val rainbowSpeedValue = IntegerValue("RainbowSpeed", 5600, 500, 7000)
     val arraylistXAxisAnimSpeedValue = IntegerValue("ArraylistXAxisAnimSpeed", 10, 5, 20)
     val arraylistXAxisAnimTypeValue = EaseUtils.getEnumEasingList("ArraylistXAxisAnimType")
     val arraylistXAxisAnimOrderValue = EaseUtils.getEnumEasingOrderList("ArraylistXAxisHotbarAnimOrder").displayable { !arraylistXAxisAnimTypeValue.equals("NONE") }
@@ -48,7 +48,7 @@ object HUD : Module() {
     val arraylistYAxisAnimTypeValue = EaseUtils.getEnumEasingList("ArraylistYAxisAnimType")
     val arraylistYAxisAnimOrderValue = EaseUtils.getEnumEasingOrderList("ArraylistYAxisHotbarAnimOrder").displayable { !arraylistYAxisAnimTypeValue.equals("NONE") }
     val fontEpsilonValue = FloatValue("FontVectorEpsilon", 0.5f, 0f, 1.5f)
-    private val buttonValue = ListValue("Button", arrayOf("Better", "RGBRounded", "Wolfram", "Rounded", "Hyperium", "RGB", "Badlion", "Flat", "FLine", "Rise", "Vanilla"), "Rounded")
+    private val buttonValue = ListValue("Button", arrayOf("Better", "RGBRounded", "Wolfram", "Rounded", "Hyperium", "RGB", "Badlion", "Flat", "FLine", "Rise", "Vanilla"), "RGBRounded")
 
     private var lastFontEpsilon = 0f
 

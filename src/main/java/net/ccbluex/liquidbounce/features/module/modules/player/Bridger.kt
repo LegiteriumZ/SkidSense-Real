@@ -48,7 +48,7 @@ object Bridger : Module() {
     val modeValue = ListValue(
         "Mode",
         arrayOf("Simple", "SpeedBridge", "Breezily", "JitterBridge", "TellyBridge", "GodBridge"),
-        "Simple"
+        "Breezily"
     )
 
     val safewalkValue = ListValue(
@@ -64,7 +64,7 @@ object Bridger : Module() {
     // Visuals
     private val counter = BoolValue("Counter", true)
     private val counterDisplayValue =
-        ListValue("Counter-Mode", arrayOf("FDP", "Simple", "Modern"), "FDP").displayable { counter.get() }
+        ListValue("Counter-Mode", arrayOf("FDP", "Simple", "Modern"), "Modern").displayable { counter.get() }
     private val barrier = ItemStack(Item.getItemById(166), 0, 0)
 
 
