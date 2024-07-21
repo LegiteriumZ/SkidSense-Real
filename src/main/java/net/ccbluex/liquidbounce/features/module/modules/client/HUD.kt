@@ -71,9 +71,9 @@ object HUD : Module() {
             3.0f,
             rainbow().rgb
         )
-        width += mc.fontRendererObj.getStringWidth("FDP")
+        width += mc.fontRendererObj.getStringWidth("S")
         mc.fontRendererObj.drawStringWithShadow(
-            "CLIENT",
+            "kidSense Client",
             width.toFloat(),
             3.0f,
             -1
