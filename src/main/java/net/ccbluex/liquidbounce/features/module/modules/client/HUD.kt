@@ -66,7 +66,7 @@ object HUD : Module() {
     private fun renderWatermark() {
         var width = 3
         mc.fontRendererObj.drawStringWithShadow(
-            "FDP",
+            "S",
             3.0f,
             3.0f,
             rainbow().rgb
