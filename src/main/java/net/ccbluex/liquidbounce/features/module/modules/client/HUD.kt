@@ -37,10 +37,10 @@ object HUD : Module() {
     val HealthValue = BoolValue("Health", true)
     val waterMark = BoolValue("Watermark", true)
     val rainbowStartValue = FloatValue("RainbowStart", 1f, 0f, 1f)
-    val rainbowStopValue = FloatValue("RainbowStop", 0.15, 0f, 1f)
-    val rainbowSaturationValue = FloatValue("RainbowSaturation", 1f, 0f, 1f)
-    val rainbowBrightnessValue = FloatValue("RainbowBrightness", 1f, 0f, 1f)
-    val rainbowSpeedValue = IntegerValue("RainbowSpeed", 5600, 500, 7000)
+    val rainbowStopValue = FloatValue("RainbowStop", 0.15f, 0f, 1f)
+    val rainbowSaturationValue = FloatValue("RainbowSaturation", 0.45f, 0f, 1f)
+    val rainbowBrightnessValue = FloatValue("RainbowBrightness", 0.85f, 0f, 1f)
+    val rainbowSpeedValue = IntegerValue("RainbowSpeed", 6000, 500, 7000)
     val arraylistXAxisAnimSpeedValue = IntegerValue("ArraylistXAxisAnimSpeed", 10, 5, 20)
     val arraylistXAxisAnimTypeValue = EaseUtils.getEnumEasingList("ArraylistXAxisAnimType")
     val arraylistXAxisAnimOrderValue = EaseUtils.getEnumEasingOrderList("ArraylistXAxisHotbarAnimOrder").displayable { !arraylistXAxisAnimTypeValue.equals("NONE") }
@@ -66,14 +66,14 @@ object HUD : Module() {
     private fun renderWatermark() {
         var width = 3
         mc.fontRendererObj.drawStringWithShadow(
-            "S",
+            "FDP",
             3.0f,
             3.0f,
             rainbow().rgb
         )
-        width += mc.fontRendererObj.getStringWidth("S")
+        width += mc.fontRendererObj.getStringWidth("FDP")
         mc.fontRendererObj.drawStringWithShadow(
-            "kidSense",
+            "CLIENT",
             width.toFloat(),
             3.0f,
             -1
@@ -85,7 +85,7 @@ object HUD : Module() {
         LiquidBounce.hud.update()
         if (mc.currentScreen == null && lastFontEpsilon != fontEpsilonValue.get()) {
             lastFontEpsilon = fontEpsilonValue.get()
-            alert("You need to reload SkidSense to apply changes!")
+            alert("You need to reload SkidSense Client to apply changes!")
         }
     }
 
