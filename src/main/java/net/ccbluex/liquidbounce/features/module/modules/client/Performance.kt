@@ -17,6 +17,6 @@ object Performance : Module() {
     @JvmField
     var fastEntityLightningValue = BoolValue("FastEntityLightning", true)
     @JvmField
-    var fastBlockLightningValue = BoolValue("FastBlockLightning", true
+    var fastBlockLightningValue = BoolValue("FastBlockLightning", true)
 }
 

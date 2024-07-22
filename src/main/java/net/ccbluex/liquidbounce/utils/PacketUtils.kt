@@ -15,7 +15,9 @@ object PacketUtils : MinecraftInstance() {
         }
         return false
     }
-
+    fun handlePacketNoEvent(packet: Packet<*>) {
+        (packet as Packet<INetHandlerPlayClient>).processPacket(mc.netHandler)
+    }
     @JvmStatic
     fun sendPacketNoEvent(packet: Packet<INetHandlerPlayServer>) {
         packets.add(packet)
