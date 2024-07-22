@@ -1,5 +1,7 @@
 package net.ccbluex.liquidbounce.utils
 
+import net.ccbluex.liquidbounce.event.EventTarget
+import net.ccbluex.liquidbounce.event.WorldEvent
 import net.minecraft.network.Packet
 import net.minecraft.network.play.INetHandlerPlayClient
 import net.minecraft.network.play.INetHandlerPlayServer
@@ -7,6 +9,7 @@ import net.minecraft.network.play.server.*
 
 object PacketUtils : MinecraftInstance() {
     private val packets = ArrayList<Packet<INetHandlerPlayServer>>()
+    val packetList = arrayListOf<Packet<*>>()
 
     fun handleSendPacket(packet: Packet<*>): Boolean {
         if (packets.contains(packet)) {
@@ -20,9 +23,15 @@ object PacketUtils : MinecraftInstance() {
     }
     @JvmStatic
     fun sendPacketNoEvent(packet: Packet<INetHandlerPlayServer>) {
+        packetList.add(packet)
         packets.add(packet)
         mc.netHandler.addToSendQueue(packet)
     }
+    @EventTarget
+    fun onWorld(event: WorldEvent) {
+        packetList.clear()
+    }
+
 
     val S12PacketEntityVelocity.realMotionX: Float
         get() = motionX / 8000f

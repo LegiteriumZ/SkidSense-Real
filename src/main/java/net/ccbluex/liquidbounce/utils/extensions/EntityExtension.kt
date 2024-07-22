@@ -48,6 +48,8 @@ fun getNearestPointBB(eye: Vec3, box: AxisAlignedBB): Vec3 {
     return Vec3(origin[0], origin[1], origin[2])
 }
 
+
+
 fun Entity.rayTraceWithCustomRotation(blockReachDistance: Double, yaw: Float, pitch: Float): MovingObjectPosition? {
     val vec3 = this.getPositionEyes(1f)
     val vec31 = this.getVectorForRotation(pitch, yaw)

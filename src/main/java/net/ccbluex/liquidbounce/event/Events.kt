@@ -130,7 +130,7 @@ class MoveEvent(var x: Double, var y: Double, var z: Double) : CancellableEvent(
         z = 0.0
     }
 }
-
+class PostMotionEvent: Event()
 /**
  * Called when receive or send a packet
  */
