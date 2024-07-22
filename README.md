@@ -1,9 +1,8 @@
 <div align="center">
 <h1>SkidSense CLIENT</h1>
 <h3>A free mixin-based injection hacked-client for Minecraft using Minecraft Forge based on LiquidBounce.</h3>
-Website: <a href="dsc.gg/binhz">dsc.gg/binhz</a><br>
-Latest build: <a href="dsc.gg/binhz">beta-version</a><br>
-Discord: <a href="https://dsc.gg/binhz">dsc.gg/fdpdiscord</a><br>
+Dev Bio: <a href="e-z.bio/binhz">e-z.bio/binhz</a><br>
+Discord: <a href="https://dsc.gg/binhz">dsc.gg/binhz</a><br>
 </div>
 
 ## How Do I Install SkidSense Client?
