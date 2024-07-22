@@ -101,7 +101,7 @@ object Insult : Module() {
     private fun sendInsultWords(msg: String, name: String) {
         var message = msg.replace("%name%", name)
         if (waterMarkValue.get()) {
-            message = "[FDPClient] $message"
+            message = "[SkidSense] $message"
         }
         mc.thePlayer.sendChatMessage(message)
     }
