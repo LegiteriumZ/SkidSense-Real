@@ -10,7 +10,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.value.BoolValue
 import net.ccbluex.liquidbounce.features.value.ListValue
-@ModuleInfo(name = "Rotations", category = ModuleCategory.CLIENT, canEnable = false)
+@ModuleInfo(name = "Rotations", category = ModuleCategory.CLIENT, canEnable = false, defaultOn = true)
 object Rotations : Module() {
     val headValue = BoolValue("Head", true)
     val bodyValue = BoolValue("Body", true)

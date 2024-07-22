@@ -80,7 +80,7 @@ class CategoryElement(val category: ModuleCategory): MinecraftInstance() {
         if (lastHeight > height - 60F) {
             val last = (height - 60F) - (height - 60F) * ((height - 60F) / lastHeight)
             val multiply = last * abs(animScrollHeight / (-lastHeight + height - 60F)).coerceIn(0F, 1F)
-            RenderUtils.originalRoundedRect(x + width - 6F, y + 5F + multiply, x + width - 4F, y + 5F + (height - 60F) * ((height - 60F) / lastHeight) + multiply, 1F, 0x50FFFFFF)
+            RenderUtils.originalRoundedRect(x + width - 6F, y + 5F + multiply, x + width - 4F, y + 5F + (height - 60F) * ((height - 60F) / lastHeight) + multiply, 1F, 0x58101010)
         }
     }
 

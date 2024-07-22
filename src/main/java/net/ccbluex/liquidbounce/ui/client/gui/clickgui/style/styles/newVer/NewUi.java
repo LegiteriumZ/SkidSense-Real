@@ -76,10 +76,12 @@ public class NewUi extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         // will draw reduced ver once it gets under 1140x780.
         drawFullSized(mouseX, mouseY, partialTicks, ClickGUIModule.generateColor());
+        RenderUtils.originalRoundedRect(30F, 30F, this.width - 30F, this.height - 30F, 8F, 0x58101010);
+
     }
 
     private void drawFullSized(int mouseX, int mouseY, float partialTicks, Color accentColor) {
-        RenderUtils.originalRoundedRect(30F, 30F, this.width - 30F, this.height - 30F, 8F, 0xFF101010);
+        RenderUtils.originalRoundedRect(30F, 30F, this.width - 30F, this.height - 30F, 8F, 0x58101010);
         // something to make it look more like windoze
         if (MouseUtils.mouseWithinBounds(mouseX, mouseY, this.width - 54F, 30F, this.width - 30F, 50F))
             fading += 0.2F * RenderUtils.deltaTime * 0.045F;
