@@ -44,7 +44,7 @@ class ESP : Module() {
     private val outlineWidthValue = FloatValue("Outline-Width", 3f, 0.5f, 5f).displayable { modeValue.equals("Outline") }
     val wireframeWidthValue = FloatValue("WireFrame-Width", 2f, 0.5f, 5f).displayable { modeValue.equals("WireFrame") }
     private val shaderOutlineRadiusValue = FloatValue("ShaderOutline-Radius", 1.35f, 1f, 2f).displayable { modeValue.equals("ShaderOutline") }
-    private val shaderGlowRadiusValue = FloatValue("ShaderGlow-Radius", 2.3f, 2f, 3f).displayable { modeValue.equals("ShaderGlow") }
+    private val shaderGlowRadiusValue = FloatValue("ShaderGlow-Radius", 2.3f, 1f, 3f).displayable { modeValue.equals("ShaderGlow") }
     private val csgoDirectLineValue = BoolValue("CSGO-DirectLine", false).displayable { modeValue.equals("CSGO") }
     private val csgoShowHealthValue = BoolValue("CSGO-ShowHealth", true).displayable { modeValue.equals("CSGO") }
     private val csgoShowHeldItemValue = BoolValue("CSGO-ShowHeldItem", true).displayable { modeValue.equals("CSGO") }

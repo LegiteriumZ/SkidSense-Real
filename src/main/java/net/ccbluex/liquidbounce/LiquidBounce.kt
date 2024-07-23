@@ -191,42 +191,11 @@ object LiquidBounce {
         fileManager.loadConfigs(fileManager.hudConfig, fileManager.xrayConfig)
 
         // run update checker
-        if (CLIENT_VERSION != "unknown") {
-            thread(block = this::checkUpdate)
-        }
-        ClientUtils.logInfo("Loading Script Subscripts...")
-        for (subscript in fileManager.subscriptsConfig.subscripts) {
-            Subscriptions.addSubscribes(ScriptSubscribe(subscript.url, subscript.name))
-            scriptManager.disableScripts()
-            scriptManager.unloadScripts()
-            for (scriptSubscribe in Subscriptions.subscribes) {
-                scriptSubscribe.load()
-            }
-            scriptManager.loadScripts()
-            scriptManager.enableScripts()
-        }
+
         ClientUtils.setTitle()
         ClientUtils.logInfo("$CLIENT_NAME $CLIENT_VERSION loaded in ${(System.currentTimeMillis() - startTime)}ms!")
     }
 
-    private fun checkUpdate() {
-        try {
-            val get = HttpUtils.get("https://api.github.com/repos/SkidderMC/FDPClient/commits/${gitInfo["git.branch"]}")
-
-            val jsonObj = JsonParser()
-                .parse(get).asJsonObject
-
-            latest = jsonObj.get("sha").asString.substring(0, 7)
-
-            if (latest != gitInfo["git.commit.id.abbrev"]) {
-                ClientUtils.logInfo("New version available: $latest")
-            } else {
-                ClientUtils.logInfo("No new version available")
-            }
-        } catch (t: Throwable) {
-            ClientUtils.logError("Failed to check for updates.", t)
-        }
-    }
 
     /**
      * Execute if client ui type is selected
