@@ -1,7 +1,7 @@
 /*
- * FDPClient Hacked Client
+ * LiquidBounce Hacked Client
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge by LiquidBounce.
- * https://github.com/SkidderMC/FDPClient/
+ * https://github.com/SkidderMC/LiquidBounce/
  */
 package net.ccbluex.liquidbounce.features.module.modules.render
 
@@ -13,6 +13,10 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot
 import net.ccbluex.liquidbounce.features.module.modules.misc.Teams
+import net.ccbluex.liquidbounce.features.value.BoolValue
+import net.ccbluex.liquidbounce.features.value.FloatValue
+import net.ccbluex.liquidbounce.features.value.ListValue
+import net.ccbluex.liquidbounce.features.value.IntegerValue
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.EntityUtils
 import net.ccbluex.liquidbounce.utils.extensions.ping
@@ -30,7 +34,8 @@ import java.awt.Color
 import kotlin.math.roundToInt
 
 @ModuleInfo(name = "NameTags", category = ModuleCategory.RENDER)
-class NameTags : Module() {
+object NameTags : Module() {
+
     private val modeValue = ListValue("Mode", arrayOf("Simple", "Liquid", "Jello"), "Liquid")
     private val healthValue = BoolValue("Health", true).displayable { modeValue.equals("Liquid") }
     private val pingValue = BoolValue("Ping", true).displayable { modeValue.equals("Liquid") }
@@ -42,7 +47,6 @@ class NameTags : Module() {
     private val clearNamesValue = BoolValue("ClearNames", true)
     private val fontValue = FontValue("Font", Fonts.font40)
     private val borderValue = BoolValue("Border", true)
-    val localValue = BoolValue("LocalPlayer", true)
     private val fontShadowValue = BoolValue("Shadow", true)
     private val hackerValue = BoolValue("Hacker", true)
     private val jelloColorValue = BoolValue("JelloHPColor", true).displayable { modeValue.equals("Jello") }
@@ -63,6 +67,7 @@ class NameTags : Module() {
     private var entityKeep = "yes zywl"
 
     private val inventoryBackground = ResourceLocation("textures/gui/container/inventory.png")
+
 
 
     private fun getPlayerName(entity: EntityLivingBase): String {
@@ -108,7 +113,7 @@ class NameTags : Module() {
         if (onlyTarget.get() && targetTicks == 0) {
             return
         }
-        
+
         // Set fontrenderer local
         val fontRenderer = fontValue.get()
 

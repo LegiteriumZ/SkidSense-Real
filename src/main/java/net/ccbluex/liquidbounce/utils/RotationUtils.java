@@ -10,6 +10,9 @@ import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.event.TickEvent;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.Packet;
@@ -101,6 +104,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
         return RotationUtils.getRotations(entity.posX, entity.posY + (entity.getEntityBoundingBox().maxY-entity.getEntityBoundingBox().minY)*0.5, entity.posZ);
     }
 
+
     /**
      * Face target with bow
      *
@@ -162,6 +166,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
         ));
     }
 
+
     /**
      * Get the center of a box
      *
@@ -182,7 +187,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
      * @param throughWalls throughWalls option
      * @return center
      */
-    
+
     //TODO : searchCenter Big Update lol(Better Center calculate method & Jitter Support(Better Random Center)) / Co丶Dynamic : Wait until Mid-Autumn Festival
     public static VecRotation searchCenter(final AxisAlignedBB bb, final boolean outborder, final boolean random, final boolean predict, final boolean throughWalls) {
         if(outborder) {
@@ -213,13 +218,13 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
 
         return vecRotation;
     }
-    
+
     public static VecRotation calculateCenter(final String calMode, final String randMode, final double randomRange, final AxisAlignedBB bb, final boolean predict, final boolean throughWalls) {
 
         //final Rotation randomRotation = toRotation(randomVec, predict);
 
         VecRotation vecRotation = null;
-        
+
         double xMin;
         double yMin;
         double zMin;
@@ -229,13 +234,13 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
         double xDist;
         double yDist;
         double zDist;
-        
+
         xMin = 0.15D; xMax = 0.85D; xDist = 0.1D;
         yMin = 0.15D; yMax = 1.00D; yDist = 0.1D;
         zMin = 0.15D; zMax = 0.85D; zDist = 0.1D;
-        
+
         Vec3 curVec3 = null;
-        
+
         switch(calMode) {
             case "LiquidBounce":
                 break;
@@ -276,38 +281,38 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
                         final VecRotation currentVec = new VecRotation(vec3, rotation);
 
                         if (vecRotation == null || (getRotationDifference(currentVec.getRotation()) < getRotationDifference(vecRotation.getRotation()))) {
-                            vecRotation = currentVec; 
+                            vecRotation = currentVec;
                             curVec3 = vec3;
                         }
                     }
                 }
             }
         }
-        
+
         if(vecRotation == null || randMode.equals("Off"))
             return vecRotation;
-        
+
         double rand1 = random.nextDouble();
         double rand2 = random.nextDouble();
         double rand3 = random.nextDouble();
-        
+
         final double xRange = bb.maxX - bb.minX;
         final double yRange = bb.maxY - bb.minY;
         final double zRange = bb.maxZ - bb.minZ;
         double minRange = 999999.0D;
-        
+
         if(xRange<=minRange) minRange = xRange;
         if(yRange<=minRange) minRange = yRange;
         if(zRange<=minRange) minRange = zRange;
-        
+
         rand1 = rand1 * minRange * randomRange;
         rand2 = rand2 * minRange * randomRange;
         rand3 = rand3 * minRange * randomRange;
-        
+
         final double xPrecent = minRange * randomRange / xRange;
         final double yPrecent = minRange * randomRange / yRange;
         final double zPrecent = minRange * randomRange / zRange;
-        
+
         Vec3 randomVec3 = new Vec3(
                                  curVec3.xCoord - xPrecent * (curVec3.xCoord - bb.minX) + rand1,
                                  curVec3.yCoord - yPrecent * (curVec3.yCoord - bb.minY) + rand2,
@@ -326,12 +331,12 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
                                  curVec3.xCoord,
                                  curVec3.yCoord - yPrecent * (curVec3.yCoord - bb.minY) + rand2,
                                  curVec3.zCoord
-                                );                
+                                );
                 break;
         }
-        
+
         final Rotation randomRotation = toRotation(randomVec3, predict);
-        
+
         /*
         for(double xSearch = 0.00D; xSearch < 1.00D; xSearch += 0.05D) {
             for (double ySearch = 0.00D; ySearch < 1.00D; ySearch += 0.05D) {
@@ -350,7 +355,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
         }
         I Give Up :sadface: */
         vecRotation =  new VecRotation(randomVec3, randomRotation);
-        
+
         return vecRotation;
     }
     /**
@@ -520,7 +525,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
         keepLength = kl;
         revTick = 0;
     }
-    
+
     public static void setTargetRotationReverse(final Rotation rotation, int kl, int rt) {
         if(Double.isNaN(rotation.getYaw()) || Double.isNaN(rotation.getPitch())
                 || rotation.getPitch() > 90 || rotation.getPitch() < -90)
@@ -531,7 +536,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
         keepLength = kl;
         revTick = rt + 1;
     }
-    
+
     /**
      * Reset your target rotation
      */

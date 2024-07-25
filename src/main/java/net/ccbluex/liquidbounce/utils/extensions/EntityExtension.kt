@@ -13,6 +13,7 @@ import net.ccbluex.liquidbounce.utils.render.GLUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.resources.DefaultPlayerSkin
 import net.minecraft.entity.Entity
+import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.AxisAlignedBB
@@ -29,14 +30,14 @@ import kotlin.math.*
 /**
  * Allows to get the distance between the current entity and [entity] from the nearest corner of the bounding box
  */
-fun Entity.getDistanceToEntityBox(entity: Entity): Double {
-    val eyes = this.getPositionEyes(0f)
-    val pos = getNearestPointBB(eyes, entity.entityBoundingBox.expand(entity.collisionBorderSize.toDouble(), entity.collisionBorderSize.toDouble(), entity.collisionBorderSize.toDouble()))
-    val xDist = abs(pos.xCoord - eyes.xCoord)
-    val yDist = abs(pos.yCoord - eyes.yCoord)
-    val zDist = abs(pos.zCoord - eyes.zCoord)
-    return sqrt(xDist.pow(2) + yDist.pow(2) + zDist.pow(2))
-}
+
+val eyes = mc.thePlayer.getPositionEyes(1F)
+
+fun Entity.getDistanceToEntityBox(entity: Entity) = eyes.distanceTo(getNearestPointBB(eyes, entity.hitBox))
+
+fun Entity.getDistanceToBox(box: AxisAlignedBB) = eyes.distanceTo(getNearestPointBB(eyes, box))
+
+
 
 fun getNearestPointBB(eye: Vec3, box: AxisAlignedBB): Vec3 {
     val origin = doubleArrayOf(eye.xCoord, eye.yCoord, eye.zCoord)
@@ -99,6 +100,12 @@ val Entity.renderBoundingBox: AxisAlignedBB
             .offset(-this.posX, -this.posY, -this.posZ)
             .offset(this.renderPos.x, this.renderPos.y, this.renderPos.z)
     }
+val Entity.hitBox: AxisAlignedBB
+    get() {
+        val borderSize = collisionBorderSize.toDouble()
+        return entityBoundingBox.expand(borderSize, borderSize, borderSize)
+    }
+
 
 fun World.getEntitiesInRadius(entity: Entity, radius: Double = 16.0): List<Entity> {
     val box = entity.entityBoundingBox.expand(radius, radius, radius)
