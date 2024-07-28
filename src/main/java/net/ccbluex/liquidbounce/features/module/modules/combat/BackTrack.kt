@@ -32,8 +32,8 @@ import java.util.*
 import kotlin.collections.set
 
 
-@ModuleInfo(name = "FakeLag", category = ModuleCategory.COMBAT)
-object FakeLag : Module() {
+@ModuleInfo(name = "BackTrack", category = ModuleCategory.COMBAT)
+object BackTrack : Module() {
     /**
      * BackTrack
      */
