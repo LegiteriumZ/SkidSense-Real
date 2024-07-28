@@ -12,6 +12,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.client.HUD
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly
+import net.ccbluex.liquidbounce.features.module.modules.combat.OldBacktrack.loopThroughBacktrackData
 import net.ccbluex.liquidbounce.features.module.modules.movement.StrafeFix
 import net.ccbluex.liquidbounce.features.module.modules.movement.TargetStrafe
 import net.ccbluex.liquidbounce.features.module.modules.player.Blink
@@ -562,13 +563,6 @@ class KillAura : Module() {
             }
 
             var distance = mc.thePlayer.getDistanceToEntityBox(entity)
-            if (Backtrack.state) {
-                val trackedDistance = Backtrack.getNearestTrackedDistance(entity)
-
-                if (distance > trackedDistance) {
-                    distance = trackedDistance
-                }
-            }
 
             val entityFov = RotationUtils.getRotationDifference(entity)
 
@@ -603,7 +597,7 @@ class KillAura : Module() {
             // Update rotations to current target
             if (!updateRotations(entity)) {
                 var success = false
-                Backtrack.loopThroughBacktrackData(entity) {
+                OldBacktrack.loopThroughBacktrackData(entity) {
                     if (updateRotations(entity)) {
                         success = true
                         return@loopThroughBacktrackData true

@@ -14,7 +14,7 @@ import net.ccbluex.liquidbounce.features.module.modules.client.HurtCam;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Reach;
 import net.ccbluex.liquidbounce.features.module.modules.render.CameraClip;
 import net.ccbluex.liquidbounce.features.module.modules.render.Tracers;
-import net.ccbluex.liquidbounce.features.module.modules.combat.Backtrack;
+import net.ccbluex.liquidbounce.features.module.modules.combat.OldBacktrack;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -209,7 +209,7 @@ public abstract class MixinEntityRenderer {
 
                 final ArrayList<AxisAlignedBB> boxes = new ArrayList<>();
                 boxes.add(entity1.getEntityBoundingBox().expand(f1, f1, f1));
-                Backtrack.INSTANCE.loopThroughBacktrackData(entity1, () -> {
+                OldBacktrack.INSTANCE.loopThroughBacktrackData(entity1, () -> {
                     boxes.add(entity1.getEntityBoundingBox().expand(f1, f1, f1));
                     return false;
                 });

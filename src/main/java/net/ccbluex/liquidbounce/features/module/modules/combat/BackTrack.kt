@@ -33,7 +33,7 @@ import kotlin.collections.set
 
 
 @ModuleInfo(name = "BackTrack", category = ModuleCategory.COMBAT)
-object BackTrack : Module() {
+class BackTrack : Module() {
     /**
      * BackTrack
      */
@@ -58,7 +58,6 @@ object BackTrack : Module() {
         hasPlace = false;
         clear();
     }
-
 
 
     fun fakeLagPacket(event: PacketEvent) {

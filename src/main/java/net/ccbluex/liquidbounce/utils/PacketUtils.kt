@@ -1,6 +1,8 @@
 package net.ccbluex.liquidbounce.utils
 
 import net.minecraft.network.Packet
+import net.ccbluex.liquidbounce.event.EventTarget
+import net.ccbluex.liquidbounce.event.WorldEvent
 import net.minecraft.network.play.INetHandlerPlayClient
 import net.minecraft.network.play.INetHandlerPlayServer
 import net.minecraft.network.play.server.*
@@ -180,6 +182,12 @@ object PacketUtils : MinecraftInstance() {
             throw IllegalArgumentException("Unable to match packet type to handle: ${packet.javaClass}")
         }
     }
+
+    fun handlePacketNoEvent(packet: Packet<*>) {
+        (packet as Packet<INetHandlerPlayClient>).processPacket(mc.netHandler)
+    }
+
+
 
     fun getPacketType(packet: Packet<*>): PacketType {
         val className = packet.javaClass.simpleName

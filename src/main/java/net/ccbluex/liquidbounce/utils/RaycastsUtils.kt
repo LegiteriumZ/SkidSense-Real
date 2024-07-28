@@ -1,7 +1,8 @@
 package net.ccbluex.liquidbounce.utils
 
 
-import net.ccbluex.liquidbounce.features.module.modules.combat.Backtrack
+import net.ccbluex.liquidbounce.features.module.modules.combat.BackTrack
+import net.ccbluex.liquidbounce.features.module.modules.combat.OldBacktrack
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.Vec3
@@ -69,7 +70,7 @@ object RaycastsUtils : MinecraftInstance() {
 
                 // Check newest entity first
                 checkEntity()
-                Backtrack.loopThroughBacktrackData(entity, checkEntity)
+
             }
 
             return pointedEntity
