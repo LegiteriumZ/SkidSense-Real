@@ -70,7 +70,7 @@ object RaycastsUtils : MinecraftInstance() {
 
                 // Check newest entity first
                 checkEntity()
-
+                OldBacktrack.loopThroughBacktrackData(entity, checkEntity)
             }
 
             return pointedEntity

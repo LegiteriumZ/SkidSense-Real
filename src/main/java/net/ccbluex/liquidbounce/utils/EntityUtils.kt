@@ -64,7 +64,7 @@ object EntityUtils : MinecraftInstance() {
         }
         return false
     }
-
+    
     fun canRayCast(entity: Entity): Boolean {
         if (entity is EntityLivingBase) {
             if (entity is EntityPlayer) {
