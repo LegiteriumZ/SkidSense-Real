@@ -58,12 +58,12 @@ object LiquidBounce {
 
     @JvmField
 
-    val CLIENT_VERSION = "1.0.0"
+    val CLIENT_VERSION = "1.0.2"
 
 
     @JvmField
     val CLIENT_BRANCH = (gitInfo["git.branch"] ?: "unknown").let {
-        if (it == "main") "Main" else it
+        if (it == "main") "Beta" else it
     }
 
     var isStarting = true

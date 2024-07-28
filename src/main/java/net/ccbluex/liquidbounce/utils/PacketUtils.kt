@@ -1,16 +1,13 @@
 package net.ccbluex.liquidbounce.utils
 
-import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.WorldEvent
 import net.minecraft.network.Packet
 import net.minecraft.network.play.INetHandlerPlayClient
 import net.minecraft.network.play.INetHandlerPlayServer
 import net.minecraft.network.play.server.*
 
-object PacketUtils : MinecraftInstance() {
-    private val packets = ArrayList<Packet<INetHandlerPlayServer>>()
-    val packetList = arrayListOf<Packet<*>>()
 
+object PacketUtils : MinecraftInstance() {
+    var packets = ArrayList<Packet<*>>()
     fun handleSendPacket(packet: Packet<*>): Boolean {
         if (packets.contains(packet)) {
             packets.remove(packet)
@@ -18,21 +15,12 @@ object PacketUtils : MinecraftInstance() {
         }
         return false
     }
-    fun handlePacketNoEvent(packet: Packet<*>) {
-        (packet as Packet<INetHandlerPlayClient>).processPacket(mc.netHandler)
-    }
+
     @JvmStatic
     fun sendPacketNoEvent(packet: Packet<INetHandlerPlayServer>) {
-        packetList.add(packet)
         packets.add(packet)
         mc.netHandler.addToSendQueue(packet)
     }
-    @EventTarget
-    fun onWorld(event: WorldEvent) {
-        packetList.clear()
-    }
-
-
     val S12PacketEntityVelocity.realMotionX: Float
         get() = motionX / 8000f
 
@@ -196,9 +184,9 @@ object PacketUtils : MinecraftInstance() {
     fun getPacketType(packet: Packet<*>): PacketType {
         val className = packet.javaClass.simpleName
         if (className.startsWith("C", ignoreCase = true)) {
-                return PacketType.CLIENTSIDE
+            return PacketType.CLIENTSIDE
         } else if (className.startsWith("S", ignoreCase = true)) {
-                return PacketType.SERVERSIDE
+            return PacketType.SERVERSIDE
         }
         // idk...
         return PacketType.UNKNOWN

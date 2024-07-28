@@ -1,29 +1,30 @@
 /*
- * FDPClient Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge by LiquidBounce.
- * https://github.com/SkidderMC/FDPClient/
+ * MinusBounce Hacked Client
+ * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
+ * https://github.com/MinusMC/MinusBounce
  */
 package net.ccbluex.liquidbounce.utils
 
-import net.ccbluex.liquidbounce.event.StrafeEvent
-import net.ccbluex.liquidbounce.features.module.modules.client.Rotations
+import net.minecraft.block.BlockPressurePlate.Sensitivity
 import net.ccbluex.liquidbounce.utils.block.PlaceInfo
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.MathHelper
 import net.minecraft.util.Vec3
+import net.ccbluex.liquidbounce.utils.RotationUtils
+import kotlin.math.round
 
 /**
  * Rotations
  */
 data class Rotation(var yaw: Float, var pitch: Float) {
+    constructor(yaw: Double, pitch: Double): this(yaw.toFloat(), pitch.toFloat())
 
     /**
      * Set rotations to [player]
      */
     fun toPlayer(player: EntityPlayer) {
-        if ((yaw.isNaN() || pitch.isNaN()) && Rotations.nanValue.get()) {
+        if (yaw.isNaN() || pitch.isNaN())
             return
-        }
 
         fixedSensitivity(MinecraftInstance.mc.gameSettings.mouseSensitivity)
 
@@ -31,36 +32,37 @@ data class Rotation(var yaw: Float, var pitch: Float) {
         player.rotationPitch = pitch
     }
 
+    fun fixedSensitivity(sensitivity: Float) {
+        fixedSensitivity(sensitivity, RotationUtils.serverRotation)
+    }
+
     /**
      * Patch gcd exploit in aim
      *
      * @see net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender
      */
-    fun fixedSensitivity(sensitivity: Float) {
-        if (Rotations.fixedValue.get() == "None") return
-        if (Rotations.fixedValue.get() == "Old") {
+    @JvmOverloads
+    fun fixedSensitivity(sensitivity: Float, rotation: Rotation?) {
+        rotation?.let{
             val f = sensitivity * 0.6F + 0.2F
-            val gcd = f * f * f * 1.2F
-
-            yaw -= yaw % gcd
-            pitch -= pitch % gcd
-            return
+            val m = f * f * f * 1.2f
+            yaw = it.yaw + round((yaw - it.yaw) / m) * m
+            pitch = (it.pitch + round((pitch - it.pitch) / m) * m).coerceIn(-90F, 90F)
         }
-        val f = sensitivity * 0.6F + 0.2F
-        val gcd = f * f * f * 1.2F
+    }
 
-        // get previous rotation
-        val rotation = RotationUtils.serverRotation
+    /**
+     * Apply strafe to player
+     *
+     * @author bestnub
+     */
 
-        // fix yaw
-        var deltaYaw = yaw - rotation.yaw
-        deltaYaw -= deltaYaw % gcd
-        yaw = rotation.yaw + deltaYaw
-
-        // fix pitch
-        var deltaPitch = pitch - rotation.pitch
-        deltaPitch -= deltaPitch % gcd
-        pitch = rotation.pitch + deltaPitch
+    fun toDirection(): Vec3 {
+        val f: Float = MathHelper.cos(-yaw * 0.017453292f - Math.PI.toFloat())
+        val f1: Float = MathHelper.sin(-yaw * 0.017453292f - Math.PI.toFloat())
+        val f2: Float = -MathHelper.cos(-pitch * 0.017453292f)
+        val f3: Float = MathHelper.sin(-pitch * 0.017453292f)
+        return Vec3((f1 * f2).toDouble(), f3.toDouble(), (f * f2).toDouble())
     }
 
     override fun toString(): String {
