@@ -8,6 +8,7 @@ package net.ccbluex.liquidbounce.utils
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.Listenable
 import net.ccbluex.liquidbounce.event.PacketEvent
+import net.ccbluex.liquidbounce.utils.PacketUtils.sendPacket
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.minecraft.block.Block
 import net.minecraft.init.Blocks
@@ -15,10 +16,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemPotion
 import net.minecraft.item.ItemStack
-import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement
-import net.minecraft.network.play.client.C0DPacketCloseWindow
-import net.minecraft.network.play.client.C0EPacketClickWindow
-import net.minecraft.network.play.client.C16PacketClientStatus
+import net.minecraft.network.play.client.*
 import net.minecraft.potion.Potion
 
 object InventoryUtils : MinecraftInstance(), Listenable {
@@ -27,7 +25,20 @@ object InventoryUtils : MinecraftInstance(), Listenable {
     val BLOCK_BLACKLIST = listOf(Blocks.enchanting_table, Blocks.chest, Blocks.ender_chest, Blocks.trapped_chest,
         Blocks.anvil, Blocks.sand, Blocks.web, Blocks.torch, Blocks.crafting_table, Blocks.furnace, Blocks.waterlily,
         Blocks.dispenser, Blocks.stone_pressure_plate, Blocks.wooden_pressure_plate, Blocks.red_flower, Blocks.flower_pot, Blocks.yellow_flower,
-        Blocks.noteblock, Blocks.dropper, Blocks.standing_banner, Blocks.wall_banner)
+        Blocks.noteblock, Blocks.dropper, Blocks.standing_banner, Blocks.wall_banner, Blocks.tnt)
+
+    var serverSlot
+        get() = _serverSlot
+        set(value) {
+            if (value != _serverSlot) {
+                sendPacket(C09PacketHeldItemChange(value))
+
+                _serverSlot = value
+            }
+        }
+
+    private var _serverSlot = 0
+
 
     fun findItem(startSlot: Int, endSlot: Int, item: Item): Int {
         for (i in startSlot until endSlot) {
@@ -118,6 +129,10 @@ object InventoryUtils : MinecraftInstance(), Listenable {
             return (stack.maxDamage - stack.itemDamage) / stack.maxDamage.toFloat()
         }
         return 1f
+    }
+
+    fun swap(slot: Int, hotBarNumber: Int) {
+        mc.playerController.windowClick(mc.thePlayer.inventoryContainer.windowId, slot, hotBarNumber, 2, mc.thePlayer)
     }
 
     override fun handleEvents() = true

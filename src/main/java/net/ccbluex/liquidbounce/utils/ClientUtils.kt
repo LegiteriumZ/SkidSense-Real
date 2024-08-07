@@ -15,8 +15,9 @@ import org.lwjgl.opengl.Display
 object
 ClientUtils : MinecraftInstance() {
     @JvmStatic
-    val logger = LogManager.getLogger("FDPClient")
+    val logger = LogManager.getLogger("SkidSense Client")
 
+    var runTimeTicks = 0
 
     fun logInfo(msg: String) {
         logger.info(msg)

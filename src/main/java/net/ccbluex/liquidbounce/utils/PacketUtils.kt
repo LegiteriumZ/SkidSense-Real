@@ -1,15 +1,18 @@
+/*
+ * FDPClient Hacked Client
+ * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge by LiquidBounce.
+ * https://github.com/SkidderMC/FDPClient/
+ */
 package net.ccbluex.liquidbounce.utils
 
 import net.minecraft.network.Packet
-import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.WorldEvent
 import net.minecraft.network.play.INetHandlerPlayClient
 import net.minecraft.network.play.INetHandlerPlayServer
 import net.minecraft.network.play.server.*
 
-
 object PacketUtils : MinecraftInstance() {
-    var packets = ArrayList<Packet<*>>()
+    val packets = ArrayList<Packet<*>>()
+
     fun handleSendPacket(packet: Packet<*>): Boolean {
         if (packets.contains(packet)) {
             packets.remove(packet)
@@ -19,10 +22,20 @@ object PacketUtils : MinecraftInstance() {
     }
 
     @JvmStatic
+    @JvmOverloads
+    fun sendPacket(packet: Packet<*>, triggerEvent: Boolean = true) {
+        if (triggerEvent) {
+            mc.netHandler?.addToSendQueue(packet)
+            return
+        }
+    }
+
+    @JvmStatic
     fun sendPacketNoEvent(packet: Packet<INetHandlerPlayServer>) {
         packets.add(packet)
         mc.netHandler.addToSendQueue(packet)
     }
+
     val S12PacketEntityVelocity.realMotionX: Float
         get() = motionX / 8000f
 
@@ -32,6 +45,10 @@ object PacketUtils : MinecraftInstance() {
     val S12PacketEntityVelocity.realMotionZ: Float
         get() = motionZ / 8000f
 
+
+    fun handlePacketNoEvent(packet: Packet<*>) {
+        (packet as Packet<INetHandlerPlayClient>).processPacket(mc.netHandler)
+    }
 
     fun handlePacket(packet: Packet<INetHandlerPlayClient?>) {
         val netHandler = mc.netHandler
@@ -182,12 +199,6 @@ object PacketUtils : MinecraftInstance() {
             throw IllegalArgumentException("Unable to match packet type to handle: ${packet.javaClass}")
         }
     }
-
-    fun handlePacketNoEvent(packet: Packet<*>) {
-        (packet as Packet<INetHandlerPlayClient>).processPacket(mc.netHandler)
-    }
-
-
 
     fun getPacketType(packet: Packet<*>): PacketType {
         val className = packet.javaClass.simpleName

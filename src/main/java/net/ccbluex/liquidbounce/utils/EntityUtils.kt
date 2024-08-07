@@ -1,7 +1,7 @@
 /*
- * FDPClient Hacked Client
+ * LiquidBounce Hacked Client
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge by LiquidBounce.
- * https://github.com/SkidderMC/FDPClient/
+ * https://github.com/SkidderMC/LiquidBounce/
  */
 package net.ccbluex.liquidbounce.utils
 
@@ -13,6 +13,7 @@ import net.ccbluex.liquidbounce.features.module.modules.client.Target.mobValue
 import net.ccbluex.liquidbounce.features.module.modules.client.Target.playerValue
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot.isBot
 import net.ccbluex.liquidbounce.features.module.modules.misc.Teams
+import net.ccbluex.liquidbounce.utils.extensions.toRadiansD
 import net.ccbluex.liquidbounce.utils.render.ColorUtils.stripColor
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -26,6 +27,9 @@ import net.minecraft.entity.passive.EntityBat
 import net.minecraft.entity.passive.EntitySquid
 import net.minecraft.entity.passive.EntityVillager
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.Vec3
+import kotlin.math.cos
+import kotlin.math.sin
 
 object EntityUtils : MinecraftInstance() {
     fun isSelected(entity: Entity, canAttackCheck: Boolean): Boolean {
@@ -64,7 +68,29 @@ object EntityUtils : MinecraftInstance() {
         }
         return false
     }
-    
+
+    fun isLookingOnEntities(entity: Entity, maxAngleDifference: Double): Boolean {
+        val player = mc.thePlayer ?: return false
+        val playerRotation = player.rotationYawHead
+        val playerPitch = player.rotationPitch
+
+        val maxAngleDifferenceRadians = Math.toRadians(maxAngleDifference)
+
+        val lookVec = Vec3(
+            -sin(playerRotation.toRadiansD()),
+            -sin(playerPitch.toRadiansD()),
+            cos(playerRotation.toRadiansD())
+        ).normalize()
+
+        val playerPos = player.positionVector.addVector(0.0, player.eyeHeight.toDouble(), 0.0)
+        val entityPos = entity.positionVector.addVector(0.0, entity.eyeHeight.toDouble(), 0.0)
+
+        val directionToEntity = entityPos.subtract(playerPos).normalize()
+        val dotProductThreshold = lookVec.dotProduct(directionToEntity)
+
+        return dotProductThreshold > cos(maxAngleDifferenceRadians)
+    }
+
     fun canRayCast(entity: Entity): Boolean {
         if (entity is EntityLivingBase) {
             if (entity is EntityPlayer) {
@@ -76,7 +102,6 @@ object EntityUtils : MinecraftInstance() {
         }
         return false
     }
-
 
     fun isFriend(entity: Entity): Boolean {
         return entity is EntityPlayer && entity.getName() != null && LiquidBounce.fileManager.friendsConfig.isFriend(stripColor(entity.getName()))
@@ -97,4 +122,13 @@ object EntityUtils : MinecraftInstance() {
     fun isRendered(entityToCheck: Entity?): Boolean {
         return mc.theWorld != null && mc.theWorld.getLoadedEntityList().contains(entityToCheck)
     }
+
+    fun getPing(entityPlayer: EntityPlayer?): Int {
+        if (entityPlayer == null) return 0
+
+        val networkPlayerInfo = mc.netHandler.getPlayerInfo(entityPlayer.uniqueID)
+
+        return networkPlayerInfo?.responseTime ?: 0
+    }
+
 }

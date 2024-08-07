@@ -5,7 +5,7 @@ import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.modules.combat.velocitys.VelocityMode
 import net.minecraft.client.settings.GameSettings
 
-class IntaveVelocity : VelocityMode("Legit") {
+class LegitVelocity : VelocityMode("Legit") {
 
     private var jumped = 0
 
