@@ -310,6 +310,8 @@ public abstract class MixinMinecraft {
         }
     }
 
+
+
     @Redirect(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/LoadingScreenRenderer;resetProgressAndMessage(Ljava/lang/String;)V"))
     public void loadWorld(LoadingScreenRenderer loadingScreenRenderer, String string) {
     }

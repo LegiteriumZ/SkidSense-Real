@@ -42,6 +42,7 @@ object LiquidBounce {
     const val CLIENT_NAME = "SkidSense"
 
     var Darkmode = true
+    var CLIENTTEXT = "Waiting..."
     const val COLORED_NAME = "§b[§b§lSkidSense Client§b] "
     const val CLIENT_CREATOR = "CCBlueX, Zywl & SkidderMC TEAM, LegiteriumZ"
     const val CLIENT_WEBSITE = "dsc.gg/binhz"
@@ -58,7 +59,7 @@ object LiquidBounce {
 
     @JvmField
 
-    val CLIENT_VERSION = "1.0.2"
+    val CLIENT_VERSION = "1.0.4"
 
 
     @JvmField

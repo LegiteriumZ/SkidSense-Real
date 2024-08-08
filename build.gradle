@@ -15,7 +15,7 @@ repositories {
     maven { url = "https://jitpack.io/" }
 }
 
-version = "1.0.0"
+version = "1.0.4"
 group = "org.unlegitmc.fdp"
 archivesBaseName = "SkidSense Client"
 
