@@ -32,3 +32,5 @@ this project entirely or partially for free and even commercially. However, plea
 Do the above and share your source code with everyone; just like we do!
 
 
+![Alt](https://repobeats.axiom.co/api/embed/e4466c9142016cb1b180d6ad76b7a4b53af5d0b6.svg "Repobeats analytics image")
+
